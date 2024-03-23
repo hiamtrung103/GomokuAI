@@ -168,6 +168,7 @@ class CaroAI():
 
         return board_value + value_after - value_before
 
+    # thuật toán MiniMax và AlphaBeta Pruning
     def alphaBetaPruning(self, depth, board_value, bound, alpha, beta, maximizingPlayer):
 
         if depth <= 0 or (self.checkResult() != None):
@@ -182,6 +183,7 @@ class CaroAI():
             for child in self.childNodes(bound):
                 i, j = child[0], child[1]
                 if 0 <= i < len(self.zobristTable) and 0 <= j < len(self.zobristTable[i]):  # Kiểm tra phạm vi
+                    # tạo một giới hạn mới cho các giá trị đc cập nhật và đánh giá vị trí nếu thực hiện nc đi
                     new_bound = dict(bound)
                     new_val = self.evaluate(i, j, board_value, 1, new_bound)
                     
@@ -190,6 +192,7 @@ class CaroAI():
                     
                     self.updateBound(i, j, new_bound) 
 
+                    # đánh giá vị trí hiện tại và đến lượt đối thủ
                     eval = self.alphaBetaPruning(depth-1, new_val, new_bound, alpha, beta, False)
                     if eval > max_val:
                         max_val = eval
@@ -200,6 +203,7 @@ class CaroAI():
                             self.nextBound = new_bound
                     alpha = max(alpha, eval)
 
+                # hoàn tác di chuyển và cập nhật lại zobrist hashing
                     self.boardMap[i][j] = 0 
                     self.rollingHash ^= self.zobristTable[i][j][0]
                     
@@ -214,10 +218,12 @@ class CaroAI():
             return max_val
 
         else:
+            # khởi tạo giá trị tối thiểu
             min_val = math.inf
             for child in self.childNodes(bound):
                 i, j = child[0], child[1]
                 if 0 <= i < len(self.zobristTable) and 0 <= j < len(self.zobristTable[i]):  # Kiểm tra phạm vi
+                    # tạo một giới hạn mới cho các giá trị đc cập nhật và đánh giá vị trí nếu thực hiện nc đi
                     new_bound = dict(bound)
                     new_val = self.evaluate(i, j, board_value, -1, new_bound)
 
@@ -226,6 +232,7 @@ class CaroAI():
 
                     self.updateBound(i, j, new_bound)
 
+                    # đánh giá vị trí hiện tại và đến lượt đối thủ
                     eval = self.alphaBetaPruning(depth-1, new_val, new_bound, alpha, beta, True)
                     if eval < min_val:
                         min_val = eval
@@ -236,6 +243,7 @@ class CaroAI():
                             self.nextBound = new_bound
                     beta = min(beta, eval)
                     
+                    # thực hiện di chuyển và cập nhật zobrist hash
                     self.boardMap[i][j] = 0 
                     self.rollingHash ^= self.zobristTable[i][j][1]
 
@@ -249,10 +257,13 @@ class CaroAI():
 
             return min_val
 
+    # nếu bot đi đầu tiên nước đi sẽ tự động là (7,7) giữa bàn cờ tức là (X)
     def firstMove(self):
         self.currentI, self.currentJ = 7,7
         self.setState(self.currentI, self.currentJ, 1)
 
+    # ktra xem trò chơi đã kết thúc chưa và trả về người chiến thắng nếu có 
+    # ngược lại, nếu không còn ô trống thì kết quả là hòa
     def checkResult(self):
         if self.isFive(self.currentI, self.currentJ, self.lastPlayed) \
             and self.lastPlayed in (-1, 1):
