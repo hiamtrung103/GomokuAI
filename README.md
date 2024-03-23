@@ -8,6 +8,8 @@ Cờ ca-rô là một trò chơi chiến lược có hai người chơi, đượ
 Trước khi chạy chương trình này, bạn cần cài đặt thư viện `pygame` bằng lệnh sau:
 ```
 > pip install pygame
+> pip install matplotlib
+
 ```
 ## :open_file_folder: Cấu Trúc Thư Mục
 ```
@@ -33,5 +35,5 @@ Trước khi chạy chương trình này, bạn cần cài đặt thư viện `p
 ```
 > git clone https://github.com/hiamtrung103/CaroAI.git
 > cd CaroAI
-> python3 start.py
+> python start.py
 ```

@@ -49,7 +49,7 @@ def ai_runtime(ai):
     return runtime, moves_chosen
 
 if __name__ == '__main__':
-    runtime, moves_chosen = ai_runtime(AI)
+    runtime, moves_chosen = ai_runtime(Bot)
     df = pd.DataFrame(
         {'runtime': runtime,
         'moves_chosen': moves_chosen
