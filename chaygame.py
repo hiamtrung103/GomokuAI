@@ -1,4 +1,4 @@
-import sys
+import sys, os
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QVBoxLayout, QMessageBox, QLabel
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtCore import Qt
@@ -17,7 +17,7 @@ class GameSelector(QWidget):
         logo_layout.setAlignment(Qt.AlignCenter)
         
         logo_label = QLabel(self)
-        pixmap = QPixmap(r'C:\Users\trung\Documents\GitHub\CaroAI\Assets\logo.png')
+        pixmap = QPixmap(os.path.join(os.getcwd(), 'Assets', 'logo.png'))
         pixmap = pixmap.scaled(120, 120) 
         logo_label.setPixmap(pixmap)
         logo_layout.addWidget(logo_label)

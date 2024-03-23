@@ -1,6 +1,7 @@
 from tkinter import Tk, Button, Label, PhotoImage
 import random
 import tkinter as tk
+import os
 from tkinter import messagebox
 
 colour_win = 'lightgreen'
@@ -79,8 +80,8 @@ frame.pack()
 
 # load ảnh
 player_images = {
-    'X': PhotoImage(file=r'C:\Users\trung\Documents\GitHub\CaroAI\Assets\X.png'),
-    'O': PhotoImage(file=r'C:\Users\trung\Documents\GitHub\CaroAI\Assets\O.png'),
+    'X': PhotoImage(file=os.path.join(os.getcwd(), 'Assets', 'X.png')),
+    'O': PhotoImage(file=os.path.join(os.getcwd(), 'Assets', 'O.png')),
     '': None  # kh hình
 }
 
