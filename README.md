@@ -7,8 +7,7 @@ Cờ ca-rô là một trò chơi chiến lược có hai người chơi, đượ
 ## :pushpin: Yêu Cầu
 Trước khi chạy chương trình này, bạn cần cài đặt thư viện `pygame` bằng lệnh sau:
 ```
-> pip install pygame
-> pip install matplotlib
+> pip install -r requirements.txt
 
 ```
 ## :open_file_folder: Cấu Trúc Thư Mục
