@@ -1,24 +1,38 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QVBoxLayout, QMessageBox
+from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QVBoxLayout, QMessageBox, QLabel
+from PyQt5.QtGui import QPixmap
+from PyQt5.QtCore import Qt
 import subprocess
 
 class GameSelector(QWidget):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Chọn trò chơi")
-        self.resize(150, 100)
+        self.resize(300, 100)
         
-        layout = QVBoxLayout()
+        main_layout = QVBoxLayout()
+        #main_layout.setAlignment(Qt.AlignCenter)
         
+        logo_layout = QVBoxLayout()
+        logo_layout.setAlignment(Qt.AlignCenter)
+        
+        logo_label = QLabel(self)
+        pixmap = QPixmap(r'C:\Users\trung\Documents\GitHub\CaroAI\Assets\logo.png')
+        pixmap = pixmap.scaled(120, 120) 
+        logo_label.setPixmap(pixmap)
+        logo_layout.addWidget(logo_label)
+        
+        main_layout.addLayout(logo_layout) 
+
         btn_human_vs_human = QPushButton("Chơi người với người")
         btn_human_vs_human.clicked.connect(self.nguoivsnguoi)
-        layout.addWidget(btn_human_vs_human)
+        main_layout.addWidget(btn_human_vs_human)
         
         btn_human_vs_computer = QPushButton("Chơi người vs máy")
         btn_human_vs_computer.clicked.connect(self.nguoivsmay)
-        layout.addWidget(btn_human_vs_computer)
+        main_layout.addWidget(btn_human_vs_computer)
         
-        self.setLayout(layout)
+        self.setLayout(main_layout)
     
     def nguoivsnguoi(self):
         try:
