@@ -23,8 +23,8 @@ class GameUI(object):
         pygame.display.set_caption('Chơi Caro XO!')
 
         self.board = pygame.image.load(os.path.join("assets", 'board.png')).convert()
-        self.blackPiece = pygame.image.load(os.path.join("assets", 'black_piece.png')).convert_alpha()
-        self.whitePiece = pygame.image.load(os.path.join("assets", 'white_piece.png')).convert_alpha()
+        self.blackPiece = pygame.image.load(os.path.join("assets", 'X.png')).convert_alpha()
+        self.whitePiece = pygame.image.load(os.path.join("assets", 'O.png')).convert_alpha()
         self.menuBoard = pygame.image.load(os.path.join("assets", "menu_board2.png")).convert_alpha()
         self.buttonSurf = pygame.image.load(os.path.join("assets", "button.png")).convert_alpha()
         self.buttonSurf = pygame.transform.scale(self.buttonSurf, (110, 60)) 
