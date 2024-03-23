@@ -24,7 +24,7 @@ Trước khi chạy chương trình này, bạn cần cài đặt thư viện `p
 │   └── interface.py
 ├── source
 │   └── Bot.py
-│   └── caro.py
+│   └── gomoku.py
 │   └── utils.py
 ├── .gitignore
 ├── README.md
@@ -33,7 +33,7 @@ Trước khi chạy chương trình này, bạn cần cài đặt thư viện `p
 ## :video_game: Chạy Trò Chơi
 Để tham gia vào cuộc đối đầu với Bot, bạn có thể làm như sau:
 ```
-> git clone https://github.com/hiamtrung103/CaroAI.git
-> cd CaroAI
+> git clone https://github.com/hiamtrung103/GomokuAI.git
+> cd GomokuAI
 > python start.py
 ```
