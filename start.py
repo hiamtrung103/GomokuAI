@@ -2,7 +2,7 @@ from gui.interface import *
 from source.Bot import *
 from gui.button import Button
 import source.utils as utils
-import source.caro as caro
+import source.gomoku as gomoku
 import pygame
 
 pygame.init()
@@ -107,7 +107,7 @@ def main(game):
 
             # lượt bot
             if turn == 1:
-                move_i, move_j = caro.ai_move(game.ai)
+                move_i, move_j = gomoku.ai_move(game.ai)
                 # thực hiện nước đi và cập nhật bảng zobrist
                 game.ai.setState(move_i, move_j, turn)
                 game.ai.rollingHash ^= game.ai.zobristTable[move_i][move_j][0]
