@@ -10,7 +10,7 @@ class TicTacToe(tk.Tk):
         self.colour_win = 'lightgreen'
         self.normal_colour = 'white'
         self.mark = ['X', 'O']
-        self.board_size = 14
+        self.board_size = 14 
         self.player_images = {
             'X': PhotoImage(file=os.path.join(os.getcwd(), 'Assets', 'X.png')),
             'O': PhotoImage(file=os.path.join(os.getcwd(), 'Assets', 'O.png')),
@@ -31,6 +31,7 @@ class TicTacToe(tk.Tk):
         self.buttons = []
         self.create_board()
 
+    # tạo bảng
     def create_board(self):
         for row in range(self.board_size):
             button_row = []
@@ -41,6 +42,7 @@ class TicTacToe(tk.Tk):
                 button_row.append(button)
             self.buttons.append(button_row)
 
+    # nút chơi lại
     def restart(self):
         self.player = random.choice(self.mark)
         self.label.config(text=self.player + ' turn')
@@ -49,7 +51,7 @@ class TicTacToe(tk.Tk):
             for column in range(self.board_size):
                 self.buttons[row][column].config(image=self.blank_image, text="", command=lambda r=row, c=column: self.next_turn(r, c), state=tk.NORMAL)
 
-
+    # xử lý lượt chơi tiếp theo
     def next_turn(self, row, column):
         button = self.buttons[row][column]
         if button['text'] == "" and not self.check_winner():
@@ -61,29 +63,30 @@ class TicTacToe(tk.Tk):
                 for widget in self.frame.winfo_children():
                     widget.config(state=tk.DISABLED)
             else:
+                # chuyển lượt chơi sang người chơi kế tiếp
                 self.player = self.mark[(self.mark.index(self.player) + 1) % len(self.mark)]
                 self.label.config(text=self.player + ' turn')
 
+    # ktra người chiến thắng
     def check_winner(self):
         for row in range(self.board_size):
-            for column in range(self.board_size - 4):
-                if all(self.buttons[row][column + i]['text'] == self.buttons[row][column + i + 1]['text'] != '' for i in range(4)):
-                    return True
-
-        for column in range(self.board_size):
-            for row in range(self.board_size - 4):
-                if all(self.buttons[row + i][column]['text'] == self.buttons[row + 1 + i][column]['text'] != '' for i in range(4)):
-                    return True
-
-        for row in range(self.board_size - 4):
-            for column in range(self.board_size - 4):
-                if all(self.buttons[row + i][column + i]['text'] == self.buttons[row + 1 + i][column + 1 + i]['text'] != '' for i in range(4)):
-                    return True
-
-        for row in range(self.board_size - 4):
-            for column in range(self.board_size - 1, 3, -1):
-                if all(self.buttons[row + i][column - i]['text'] == self.buttons[row + 1 + i][column - 1 - i]['text'] != '' for i in range(4)):
-                    return True
+            for column in range(self.board_size):
+                # Kiểm tra hàng ngang
+                if column + 4 < self.board_size:
+                    if all(self.buttons[row][column + i]['text'] == self.buttons[row][column + i + 1]['text'] != '' for i in range(4)):
+                        return True
+                # Kiểm tra cột dọc
+                if row + 4 < self.board_size:
+                    if all(self.buttons[row + i][column]['text'] == self.buttons[row + 1 + i][column]['text'] != '' for i in range(4)):
+                        return True
+                # Kiểm tra đường chéo chính (\)
+                if row + 4 < self.board_size and column + 4 < self.board_size:
+                    if all(self.buttons[row + i][column + i]['text'] == self.buttons[row + 1 + i][column + 1 + i]['text'] != '' for i in range(4)):
+                        return True
+                # Kiểm tra đường chéo phụ (/)
+                if row + 4 < self.board_size and column - 4 >= 0:
+                    if all(self.buttons[row + i][column - i]['text'] == self.buttons[row + 1 + i][column - 1 - i]['text'] != '' for i in range(4)):
+                        return True
 
         if all(self.buttons[row][column]['text'] != '' for row in range(self.board_size) for column in range(self.board_size)):
             self.label.config(text='Tie!')
