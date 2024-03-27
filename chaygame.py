@@ -1,4 +1,5 @@
-import sys, os
+import sys
+import os
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QVBoxLayout, QMessageBox, QLabel
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtCore import Qt
@@ -17,7 +18,8 @@ class GameSelector(QWidget):
         logo_layout.setAlignment(Qt.AlignCenter)
         
         logo_label = QLabel(self)
-        pixmap = QPixmap(os.path.join(os.getcwd(), 'Assets', 'logo.png'))
+        assets_dir = os.path.join(os.getcwd(), 'Assets')
+        pixmap = QPixmap(os.path.join(assets_dir, 'logo.png'))
         pixmap = pixmap.scaled(120, 120) 
         logo_label.setPixmap(pixmap)
         logo_layout.addWidget(logo_label)
@@ -35,17 +37,25 @@ class GameSelector(QWidget):
         self.setLayout(main_layout)
     
     def nguoivsnguoi(self):
-        try:
-            subprocess.Popen(['python', r'C:\Users\trung\Documents\GitHub\CaroAI\game2.py'])
-            print("[Người dùng chọn]: Người vs Người")
-        except FileNotFoundError:
+        game_file = os.path.join(os.getcwd(), 'game2.py')
+        if os.path.exists(game_file):
+            try:
+                subprocess.Popen(['python', game_file])
+                print("[Người dùng chọn]: Người vs Người")
+            except FileNotFoundError:
+                QMessageBox.critical(self, "Lỗi", "Không thể tìm thấy tệp game2.py")
+        else:
             QMessageBox.critical(self, "Lỗi", "Không thể tìm thấy tệp game2.py")
     
     def nguoivsmay(self):
-        try:
-            subprocess.Popen(['python', r'C:\Users\trung\Documents\GitHub\CaroAI\game.py'])
-            print("[Người dùng chọn]: Người vs Máy")
-        except FileNotFoundError:
+        game_file = os.path.join(os.getcwd(), 'game.py')
+        if os.path.exists(game_file):
+            try:
+                subprocess.Popen(['python', game_file])
+                print("[Người dùng chọn]: Người vs Máy")
+            except FileNotFoundError:
+                QMessageBox.critical(self, "Lỗi", "Không thể tìm thấy tệp game.py")
+        else:
             QMessageBox.critical(self, "Lỗi", "Không thể tìm thấy tệp game.py")
 
 if __name__ == "__main__":
