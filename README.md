@@ -39,6 +39,6 @@ Trước khi chạy chương trình này, bạn cần cài đặt các thư vi�
 > cd GomokuAI
 > python chaygame.py
 ```
-## License 📄
+## Giấy phép 📄
 
 Dự án này được cấp phép theo Giấy phép MIT - xem tệp [LICENSE.md](LICENSE) để biết chi tiết
